@@ -1,0 +1,64 @@
+users Table:
+
+| column name     | data type  | details                   |
+|-----------------|------------|---------------------------|
+| id              | integer    | not null, primary key     |
+| first_name      | string     | not null                  |
+| last_name       | string     | not null                  |
+| email           | string     | not null, unique          |
+| password        | string     | not null                  |
+| created_at      | datetime   | not null                  |
+| updated_at      | datetime   | not null                  |
+
+roles Table:
+
+| column name     | data type  | details                   |
+|-----------------|------------|---------------------------|
+| id              | integer    | not null, primary key     |
+| name            | string     | not null                  |
+
+user_roles Table (Many-to-Many Relationship: Users <-> Roles):
+
+| column name     | data type  | details                   |
+|-----------------|------------|---------------------------|
+| id              | integer    | not null, primary key     |
+| user_id         | integer    | references users(id)      |
+| role_id         | integer    | references roles(id)      |
+
+departments Table:
+
+| column name     | data type  | details                   |
+|-----------------|------------|---------------------------|
+| id              | integer    | not null, primary key     |
+| name            | string     | not null                  |
+| description     | text       |                           |
+
+user_departments Table (Many-to-Many Relationship: Users <-> Departments):
+
+| column name     | data type  | details                   |
+|-----------------|------------|---------------------------|
+| id              | integer    | not null, primary key     |
+| user_id         | integer    | references users(id)      |
+| department_id   | integer    | references departments(id)|
+
+jobs Table:
+
+| column name     | data type  | details                   |
+|-----------------|------------|---------------------------|
+| id              | integer    | not null, primary key     |
+| title           | string     |                           |
+| description     | text       |                           |
+| status          | string     |                           |
+| department_id   | integer    | references departments(id)|
+| created_at      | datetime   | not null                  |
+| updated_at      | datetime   | not null                  |
+
+notes Table:
+
+| column name     | data type  | details                   |
+|-----------------|------------|---------------------------|
+| id              | integer    | not null, primary key     |
+| content         | text       |                           |
+| user_id         | integer    | references users(id)      |
+| job_id          | integer    | references jobs(id)       |
+| created_at      | datetime   | not null                  |
