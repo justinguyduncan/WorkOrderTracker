@@ -9,6 +9,7 @@ def seed_departments():
     sdc = Department(name='Small Document')
     dispatch = Department(name='Dispatch')
 
+    db.session.add(admin)
     db.session.add(color)
     db.session.add(ldc)
     db.session.add(sdc)
