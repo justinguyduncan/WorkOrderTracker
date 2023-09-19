@@ -19,5 +19,14 @@ class Job(db.Model):
 
     department = db.relationship('Department', backref='jobs')
 
-    def __str__(self):
-        return self.title
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'po_number': self.po_number,
+            'description': self.description,
+            'status': self.status,
+            'department_id': self.department_id,
+            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+            'updated_at': self.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
+        }

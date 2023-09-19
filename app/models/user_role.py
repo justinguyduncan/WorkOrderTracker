@@ -16,5 +16,11 @@ class UserRole(db.Model):
     user = db.relationship('User', backref='user_roles')
     role = db.relationship('Role', backref='user_roles')
 
-    def __str__(self):
-        return f"{self.user} - {self.role}"
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'role_id': self.role_id,
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat(),
+        }
