@@ -1,7 +1,5 @@
 const initialState = {
     notes: [],
-    loading: false,
-    error: null,
   };
 
   // Action types

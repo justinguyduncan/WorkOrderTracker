@@ -15,5 +15,9 @@ class UserDepartment(db.Model):
     user = db.relationship('User', backref='user_departments')
     department = db.relationship('Department', backref='user_departments')
 
-    def __str__(self):
-        return f"{self.user} - {self.department}"
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'department_id': self.department_id,
+        }

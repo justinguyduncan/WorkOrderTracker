@@ -1,7 +1,5 @@
 const initialState = {
     departments: [],
-    loading: false,
-    error: null,
   };
 
   // Action types

@@ -11,5 +11,5 @@ class Department(db.Model):
     name = db.Column(db.String(255), nullable=False)
 
 
-    def __str__(self):
-        return self.name
+    def to_dict(self):
+        return {'id': self.id, 'name': self.name}

@@ -16,5 +16,11 @@ class Note(db.Model):
     user = db.relationship('User', backref='notes')
     job = db.relationship('Job', backref='notes')
 
-    def __str__(self):
-        return self.title
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'content': self.content,
+            'user_id': self.user_id,
+            'job_id': self.job_id,
+            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+        }

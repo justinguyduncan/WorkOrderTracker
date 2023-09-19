@@ -7,7 +7,7 @@ from flask_login import login_required
 job_routes = Blueprint('jobs', __name__)
 
 # Create a new job
-@job_routes.route('/jobs', methods=['POST'])
+@job_routes.route('/', methods=['POST'])
 @login_required
 def create_job():
     form = JobForm()
@@ -26,14 +26,14 @@ def create_job():
     return jsonify({'errors': form.errors}), 400
 
 # Retrieve a list of all jobs
-@job_routes.route('/jobs', methods=['GET'])
+@job_routes.route('/', methods=['GET'])
 @login_required
 def get_jobs():
     jobs = Job.query.all()
     return jsonify({'jobs': [job.to_dict() for job in jobs]})
 
 # Retrieve details of a specific job
-@job_routes.route('/jobs/<int:id>', methods=['GET'])
+@job_routes.route('/<int:id>', methods=['GET'])
 @login_required
 def get_job(id):
     job = Job.query.get(id)
@@ -42,7 +42,7 @@ def get_job(id):
     return jsonify({'message': 'Job not found'}), 404
 
 # Update a job's details
-@job_routes.route('/jobs/<int:id>', methods=['PUT'])
+@job_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_job(id):
     job = Job.query.get(id)
@@ -63,7 +63,7 @@ def update_job(id):
     return jsonify({'errors': form.errors}), 400
 
 # Delete a job
-@job_routes.route('/jobs/<int:id>', methods=['DELETE'])
+@job_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_job(id):
     job = Job.query.get(id)
@@ -78,7 +78,7 @@ def delete_job(id):
 
 
 # Retrieve jobs specific to a department
-@job_routes.route('/departments/<int:id>/jobs', methods=['GET'])
+@job_routes.route('/departments/<int:id>', methods=['GET'])
 @login_required
 def get_department_jobs(id):
     department = Department.query.get(id)
@@ -90,7 +90,7 @@ def get_department_jobs(id):
     return jsonify({'jobs': [job.to_dict() for job in jobs]})
 
 # Update a job's status
-@job_routes.route('/jobs/<int:id>/status', methods=['PUT'])
+@job_routes.route('/<int:id>/status', methods=['PUT'])
 @login_required
 def update_job_status(id):
     job = Job.query.get(id)

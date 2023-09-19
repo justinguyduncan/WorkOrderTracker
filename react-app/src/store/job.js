@@ -1,11 +1,5 @@
 
-// Define initial state
-const initialState = {
-    jobs: [],
-    interviews: [],
-    loading: false,
-    error: null,
-  };
+
 
   // Action types
   export const CREATE_JOB_SUCCESS = 'CREATE_JOB_SUCCESS';
@@ -49,7 +43,7 @@ const initialState = {
 
   // Thunk action creators
   export const createJob = (jobData) => async (dispatch) => {
-    const response = await fetch('/api/jobs', {
+    const response = await fetch('/api/job', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -65,7 +59,7 @@ const initialState = {
 
   export const fetchJobs = () => async (dispatch) => {
 
-      const response = await fetch('/api/jobs');
+      const response = await fetch('/api/job');
       const data = await response.json();
       if (response.ok) {
         dispatch(fetchJobsSuccess(data.jobs))}};
@@ -101,6 +95,13 @@ const initialState = {
     } else {
         dispatch(fetchJobsFailure('Failed to delete the job'));
     }
+};
+
+// Define initial state
+const initialState = {
+  jobs: [],
+  loading: false,
+  error: null,
 };
 
   // Reducer function
