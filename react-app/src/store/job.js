@@ -43,7 +43,7 @@
 
   // Thunk action creators
   export const createJob = (jobData) => async (dispatch) => {
-    const response = await fetch('/api/job', {
+    const response = await fetch('/api/jobs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -58,9 +58,10 @@
 
 
   export const fetchJobs = () => async (dispatch) => {
-
-      const response = await fetch('/api/job');
+    console.log('inside fetchJobs');
+      const response = await fetch('/api/jobs');
       const data = await response.json();
+      console.log(data);
       if (response.ok) {
         dispatch(fetchJobsSuccess(data.jobs))}};
 
@@ -100,8 +101,6 @@
 // Define initial state
 const initialState = {
   jobs: [],
-  loading: false,
-  error: null,
 };
 
   // Reducer function

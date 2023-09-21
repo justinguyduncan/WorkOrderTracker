@@ -7,7 +7,7 @@ from flask_login import login_required
 department_routes = Blueprint('departments', __name__)
 
 # Create a new department
-@department_routes.route('/departments', methods=['POST'])
+@department_routes.route('/', methods=['POST'])
 @login_required
 def create_department():
     form = DepartmentForm()
@@ -27,7 +27,7 @@ def create_department():
     return jsonify({'errors': form.errors}), 400
 
 # Retrieve a list of departments
-@department_routes.route('/departments', methods=['GET'])
+@department_routes.route('/', methods=['GET'])
 @login_required
 def get_departments():
     # Get all departments
@@ -39,7 +39,7 @@ def get_departments():
     return jsonify({'departments': departments_data})
 
 # Retrieve details of a specific department
-@department_routes.route('/departments/<int:id>', methods=['GET'])
+@department_routes.route('/<int:id>', methods=['GET'])
 @login_required
 def get_department(id):
     # Get the department by ID
@@ -52,7 +52,7 @@ def get_department(id):
     return jsonify({'department': department.to_dict()})
 
 # Update a department's details
-@department_routes.route('/departments/<int:id>', methods=['PUT'])
+@department_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_department(id):
     # Get the department by ID
@@ -74,7 +74,7 @@ def update_department(id):
     return jsonify({'message': 'Department updated successfully'})
 
 # Delete a department
-@department_routes.route('/departments/<int:id>', methods=['DELETE'])
+@department_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_department(id):
     # Get the department by ID

@@ -8,7 +8,7 @@ job_routes = Blueprint('jobs', __name__)
 
 # Create a new job
 @job_routes.route('/', methods=['POST'])
-@login_required
+# @login_required
 def create_job():
     form = JobForm()
 
@@ -27,7 +27,7 @@ def create_job():
 
 # Retrieve a list of all jobs
 @job_routes.route('/', methods=['GET'])
-@login_required
+# @login_required
 def get_jobs():
     jobs = Job.query.all()
     return jsonify({'jobs': [job.to_dict() for job in jobs]})
