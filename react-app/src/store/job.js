@@ -43,6 +43,7 @@
 
   // Thunk action creators
   export const createJob = (jobData) => async (dispatch) => {
+    console.log(jobData)
     const response = await fetch('/api/jobs', {
       method: 'POST',
       headers: {
@@ -50,15 +51,15 @@
       },
       body: JSON.stringify(jobData),
     });
-    const data = await response.json();
     if (response.ok) {
+      const data = await response.json();
       dispatch(createJobSuccess(data));
     }
   };
 
 
   export const fetchJobs = () => async (dispatch) => {
-    console.log('inside fetchJobs');
+    // console.log('inside fetchJobs');
       const response = await fetch('/api/jobs');
       const data = await response.json();
       console.log(data);
@@ -81,9 +82,9 @@
         },
         body: JSON.stringify(updatedData),
     });
-    const data = await response.json();
     if (response.ok) {
-        dispatch(editJobSuccess(data));
+      const data = await response.json();
+      dispatch(editJobSuccess(data));
     }
     };
 
@@ -108,6 +109,12 @@ const initialState = {
     switch (action.type) {
       case FETCH_JOBS_SUCCESS:
         return { ...state, loading: false, jobs: action.payload, error: null };
+      case CREATE_JOB_SUCCESS:
+        return {
+          ...state,
+          jobs: [...state.jobs, action.payload],
+          error: null,
+        };
       case EDIT_JOB_SUCCESS:
         const updatedJobIndex = state.jobs.findIndex((job) => job.id === action.payload.id);
         const updatedJobs = [...state.jobs];

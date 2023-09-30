@@ -8,7 +8,7 @@ department_routes = Blueprint('departments', __name__)
 
 # Create a new department
 @department_routes.route('/', methods=['POST'])
-@login_required
+# @login_required
 def create_department():
     form = DepartmentForm()
 
@@ -28,7 +28,7 @@ def create_department():
 
 # Retrieve a list of departments
 @department_routes.route('/', methods=['GET'])
-@login_required
+# @login_required
 def get_departments():
     # Get all departments
     departments = Department.query.all()

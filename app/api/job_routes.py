@@ -11,13 +11,21 @@ job_routes = Blueprint('jobs', __name__)
 # @login_required
 def create_job():
     form = JobForm()
-
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         title = form.title.data
         po_number = form.po_number.data
         description = form.description.data
+        status = form.status.data
+        department_id = form.department_id.data
 
-        job = Job(title=title, po_number=po_number, description=description)
+        job = Job(
+            title=title,
+            po_number=po_number,
+            description=description,
+            status=status,
+            department_id=department_id,
+        )
         db.session.add(job)
         db.session.commit()
 
@@ -27,7 +35,7 @@ def create_job():
 
 # Retrieve a list of all jobs
 @job_routes.route('/', methods=['GET'])
-# @login_required
+@login_required
 def get_jobs():
     jobs = Job.query.all()
     return jsonify({'jobs': [job.to_dict() for job in jobs]})

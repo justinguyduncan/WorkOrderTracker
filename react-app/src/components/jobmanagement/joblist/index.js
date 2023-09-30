@@ -4,17 +4,17 @@ import { Redirect } from "react-router-dom";
 import * as jobActions from "../../../store/job";
 
 function JobList() {
-    console.log("JobList component rendering");
+    // console.log("JobList component rendering");
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const jobs = useSelector((state) => state.jobs.jobs);
 
     useEffect(() => {
-        console.log('inside use effect');
+        // console.log('inside use effect');
         dispatch(jobActions.fetchJobs());
       }, [dispatch]);
 
-      console.log('jobs',jobs);
+      // console.log('jobs',jobs);
       if (!sessionUser) return <Redirect to="/" />;
       return (
         <div>
