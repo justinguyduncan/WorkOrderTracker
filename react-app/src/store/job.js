@@ -44,7 +44,7 @@
   // Thunk action creators
   export const createJob = (jobData) => async (dispatch) => {
     console.log(jobData)
-    const response = await fetch('/api/jobs', {
+    const response = await fetch('/api/jobs/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -60,7 +60,7 @@
 
   export const fetchJobs = () => async (dispatch) => {
     // console.log('inside fetchJobs');
-      const response = await fetch('/api/jobs');
+      const response = await fetch('/api/jobs/');
       const data = await response.json();
       console.log(data);
       if (response.ok) {
@@ -74,13 +74,13 @@
         dispatch(fetchJobSuccess(data))}};
 
 
-     export const editJob = (jobId, updatedData) => async (dispatch) => {
+     export const editJob = (jobId, jobData) => async (dispatch) => {
       const response = await fetch(`/api/jobs/${jobId}`, {
         method: 'PUT',
         headers: {
         'Content-Type': 'application/json',
         },
-        body: JSON.stringify(updatedData),
+        body: JSON.stringify(jobData),
     });
     if (response.ok) {
       const data = await response.json();

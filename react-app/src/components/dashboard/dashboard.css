@@ -1,0 +1,11 @@
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 180px auto;
+    grid-template-rows: 80px auto;
+    gap: 20px;
+    height: 100vh;
+  }
+
+.ProfileButton{
+   content: center;
+}

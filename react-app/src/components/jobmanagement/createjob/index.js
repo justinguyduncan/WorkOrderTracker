@@ -11,7 +11,7 @@ function CreateJob({ jobToEdit }) {
   const { closeModal } = useModal();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
-  console.log('Session_User',sessionUser);
+  // console.log('Session_User',sessionUser);
 
   const [title, setTitle] = useState('');
   const [poNumber, setPoNumber] = useState('');
@@ -19,7 +19,7 @@ function CreateJob({ jobToEdit }) {
   const [status, setStatus] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('');
   const departments = useSelector((state) => state.departmentReducer.departments);
-
+  // console.log(jobToEdit)
 
   useEffect(() => {
     if (jobToEdit) {
@@ -42,17 +42,11 @@ function CreateJob({ jobToEdit }) {
       status,
       department_id: selectedDepartment,
     };
-
+    // console.log(jobData)
     if (jobToEdit) {
-
       dispatch(jobActions.editJob(jobToEdit.id, jobData));
-
-
     } else {
-
       dispatch(jobActions.createJob(jobData));
-
-
     }
     closeModal();
   };
@@ -106,7 +100,6 @@ function CreateJob({ jobToEdit }) {
             ))}
           </select>
         </div>
-        {/* Add status field */}
         <div>
           <label htmlFor="status">Status</label>
           <select
