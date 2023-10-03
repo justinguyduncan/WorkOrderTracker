@@ -30,11 +30,12 @@ def load_user(id):
 app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
-app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
-app.register_blueprint(job_routes, url_prefix='/api/job')
+app.register_blueprint(user_routes, url_prefix='/api/users')
+app.register_blueprint(job_routes, url_prefix='/api/jobs')
 app.register_blueprint(note_routes, url_prefix='/api/notes')
 app.register_blueprint(user_roles_routes, url_prefix='/api/roles')
+app.register_blueprint(department_routes, url_prefix='/api/departments')
 db.init_app(app)
 Migrate(app, db)
 

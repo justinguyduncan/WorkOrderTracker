@@ -6,6 +6,10 @@ import { BrowserRouter } from "react-router-dom";
 import { ModalProvider, Modal } from "./context/Modal";
 import configureStore from "./store";
 import * as sessionActions from "./store/session";
+import * as jobActions from "./store/job";
+import * as departmentActions from "./store/department";
+import * as noteActions from "./store/note";
+
 import App from "./App";
 
 import "./index.css";
@@ -15,6 +19,9 @@ const store = configureStore();
 if (process.env.NODE_ENV !== "production") {
 	window.store = store;
 	window.sessionActions = sessionActions;
+	window.jobActions = jobActions;
+	window.departmentActions = departmentActions;
+	window.noteActions = noteActions;
 }
 
 // Wrap the application with the Modal provider and render the Modal component

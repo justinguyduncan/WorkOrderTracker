@@ -37,7 +37,7 @@ export const deleteDepartmentSuccess = (departmentId) => ({
 
 // Thunk action creators
 export const createDepartment = (departmentData) => async (dispatch) => {
-  const response = await fetch('/api/departments', {
+  const response = await fetch('/api/departments/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ export const createDepartment = (departmentData) => async (dispatch) => {
 };
 
 export const fetchDepartments = () => async (dispatch) => {
-  const response = await fetch('/api/departments');
+  const response = await fetch('/api/departments/');
   const data = await response.json();
   if (response.ok) {
     dispatch(fetchDepartmentsSuccess(data.departments));

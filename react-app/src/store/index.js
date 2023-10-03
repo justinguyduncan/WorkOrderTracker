@@ -8,7 +8,7 @@ import noteReducer from './note';
 const rootReducer = combineReducers({
   session,
   departmentReducer,
-  jobReducer,
+  jobs: jobReducer,
   noteReducer
 });
 

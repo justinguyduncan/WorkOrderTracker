@@ -43,24 +43,26 @@
 
   // Thunk action creators
   export const createJob = (jobData) => async (dispatch) => {
-    const response = await fetch('/api/job', {
+    console.log(jobData)
+    const response = await fetch('/api/jobs/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(jobData),
     });
-    const data = await response.json();
     if (response.ok) {
+      const data = await response.json();
       dispatch(createJobSuccess(data));
     }
   };
 
 
   export const fetchJobs = () => async (dispatch) => {
-
-      const response = await fetch('/api/job');
+    // console.log('inside fetchJobs');
+      const response = await fetch('/api/jobs/');
       const data = await response.json();
+      console.log(data);
       if (response.ok) {
         dispatch(fetchJobsSuccess(data.jobs))}};
 
@@ -72,17 +74,17 @@
         dispatch(fetchJobSuccess(data))}};
 
 
-     export const editJob = (jobId, updatedData) => async (dispatch) => {
+     export const editJob = (jobId, jobData) => async (dispatch) => {
       const response = await fetch(`/api/jobs/${jobId}`, {
         method: 'PUT',
         headers: {
         'Content-Type': 'application/json',
         },
-        body: JSON.stringify(updatedData),
+        body: JSON.stringify(jobData),
     });
-    const data = await response.json();
     if (response.ok) {
-        dispatch(editJobSuccess(data));
+      const data = await response.json();
+      dispatch(editJobSuccess(data));
     }
     };
 
@@ -100,8 +102,6 @@
 // Define initial state
 const initialState = {
   jobs: [],
-  loading: false,
-  error: null,
 };
 
   // Reducer function
@@ -109,6 +109,12 @@ const initialState = {
     switch (action.type) {
       case FETCH_JOBS_SUCCESS:
         return { ...state, loading: false, jobs: action.payload, error: null };
+      case CREATE_JOB_SUCCESS:
+        return {
+          ...state,
+          jobs: [...state.jobs, action.payload],
+          error: null,
+        };
       case EDIT_JOB_SUCCESS:
         const updatedJobIndex = state.jobs.findIndex((job) => job.id === action.payload.id);
         const updatedJobs = [...state.jobs];
