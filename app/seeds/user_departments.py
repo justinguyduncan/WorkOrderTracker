@@ -5,9 +5,9 @@ def seed_user_departments():
 
     demo_department = UserDepartment(user_id=1, department_id=1)
     justin_department = UserDepartment(user_id=2, department_id=1)
-    brian_department = UserDepartment(user_id=3, department_id=2)
+    brian_department = UserDepartment(user_id=3, department_id=1)
     shane_department = UserDepartment(user_id=4, department_id=1)
-    mike_department = UserDepartment(user_id=5, department_id=2)
+    mike_department = UserDepartment(user_id=5, department_id=1)
     ralph_department = UserDepartment(user_id=6, department_id=3)
     luis_department = UserDepartment(user_id=7, department_id=5)
     josh_department = UserDepartment(user_id=8, department_id=4)

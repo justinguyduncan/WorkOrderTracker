@@ -31,14 +31,19 @@ function LeftNavBar() {
       setDepartmentToEdit(department);
     }
   };
+
+
   const handleModalClose = () => {
 
     setIsCreatingOrEditingDepartment(false);
   };
 
   const handleDeleteDepartment = (departmentId) => {
-    // Dispatch the action to delete the department
-    dispatch(departmentActions.deleteDepartment(departmentId));
+
+    let answer = window.confirm("Are you sure you want to delete this Job?");
+    if (answer) {
+      dispatch(departmentActions.deleteDepartment(departmentId));
+    }
   };
 
   return (

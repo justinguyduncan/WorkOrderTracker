@@ -23,3 +23,14 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/<int:id>/departments')
+@login_required
+def user_departments(id):
+    """
+    Query for the departments associated with a user and returns them in a list of department dictionaries
+    """
+    user = User.query.get(id)
+    if user:
+        return {'departments': [department.to_dict() for department in user.departments]}
+    return {'message': 'User not found'}, 404

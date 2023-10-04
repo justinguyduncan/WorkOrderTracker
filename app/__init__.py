@@ -11,6 +11,7 @@ from .api.department_routes import department_routes
 from .api.job_routes import job_routes
 from .api.notes_route import note_routes
 from .api.role_route import user_roles_routes
+from .api.user_department_routes import user_department_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -36,6 +37,7 @@ app.register_blueprint(job_routes, url_prefix='/api/jobs')
 app.register_blueprint(note_routes, url_prefix='/api/notes')
 app.register_blueprint(user_roles_routes, url_prefix='/api/roles')
 app.register_blueprint(department_routes, url_prefix='/api/departments')
+app.register_blueprint(user_department_routes, url_prefix='/api/user_departments')
 db.init_app(app)
 Migrate(app, db)
 
