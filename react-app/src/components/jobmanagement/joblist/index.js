@@ -6,7 +6,7 @@ import * as userDepartmentActions from '../../../store/user_department'
 import CreateJob from "../createjob";
 import OpenModalButton from "../../OpenModalButton";
 
-function JobList() {
+function JobList({ selectedDepartmentId }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const jobs = useSelector((state) => state.jobs.jobs);
@@ -20,6 +20,7 @@ function JobList() {
   useEffect(() => {
     if (sessionUser) {
       dispatch(userDepartmentActions.fetchUserDepartments(sessionUser.id));
+      dispatch(jobActions.fetchJobsByDepartmentId(selectedDepartmentId));
       dispatch(jobActions.fetchJobs());
     }
   }, [dispatch, sessionUser]);
@@ -31,14 +32,15 @@ function JobList() {
   function deleteJob(jobId) {
     let answer = window.confirm("Are you sure you want to delete this Job?");
     if (answer) {
-        dispatch(jobActions.deleteJob(jobId))
+      dispatch(jobActions.deleteJob(jobId))
     }
-};
+  };
 
-const filteredJobs = jobs.filter((job) => {
+ const filteredJobs = jobs.filter((job) => {
   const jobDepartmentId = job.department_id;
   return userDepartments.some((userDept) => userDept.department_id === jobDepartmentId);
 });
+
 
   if (!sessionUser) return <Redirect to="/" />;
 
@@ -50,9 +52,6 @@ const filteredJobs = jobs.filter((job) => {
             <h2 onClick={() => toggleJobDetails(job.id)}>{job.po_number} {job.title}</h2>
             {expandedJobId === job.id && (
               <div>
-                {/* <p>
-                  <strong>PO Number:</strong> {job.po_number}
-                </p> */}
                 <p>
                   <strong>Description:</strong> {job.description}
                 </p>

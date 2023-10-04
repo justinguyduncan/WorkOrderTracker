@@ -9,6 +9,7 @@
   export const EDIT_JOB_SUCCESS = 'EDIT_JOB_SUCCESS';
   export const DELETE_JOB_SUCCESS = 'DELETE_JOB_SUCCESS';
   export const FETCH_JOBS_FAILURE = 'FETCH_JOBS_FAILURE';
+  export const FILTER_JOBS_BY_DEPARTMENT = 'FILTER_JOBS_BY_DEPARTMENT';
 
   // Action creators
   export const createJobSuccess = (job) => ({
@@ -44,6 +45,11 @@
   export const fetchJobsFailure = (error) => ({
     type: FETCH_JOBS_FAILURE,
     payload: error,
+  });
+
+  export const filterJobsByDepartment = (departmentId) => ({
+    type: FILTER_JOBS_BY_DEPARTMENT,
+    payload: departmentId,
   });
 
 
@@ -105,6 +111,18 @@
     }
 };
 
+export const fetchJobsByDepartmentId = (departmentId) => async (dispatch) => {
+  const response = await fetch(`/api/jobs/department/${departmentId}`);
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(fetchJobsSuccess(data.jobs));
+  } else {
+    console.error('Failed to fetch jobs by department ID');
+    dispatch(fetchJobsFailure('An error occurred while fetching jobs by department ID'));
+  }
+};
+
+
 // Define initial state
 const initialState = {
   jobs: [],
@@ -141,6 +159,13 @@ const initialState = {
           jobs: state.jobs.filter((job) => job.id !== action.payload),
           error: null,
         };
+        case FILTER_JOBS_BY_DEPARTMENT:
+          const departmentId = action.payload;
+          const filteredJobs = state.jobs.filter((job) => job.departmentId === departmentId);
+          return {
+            ...state,
+            filteredJobs,
+          };
       case FETCH_JOBS_FAILURE:
         return { ...state, loading: false, error: action.payload };
       default:

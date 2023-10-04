@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Dashboard from "./components/dashboard/dashboard";
+import DepartmentPage from "./components/departmentmanagement/departmentlist";
 import * as departmentactions from "./store/department"
 
 function App() {
@@ -33,8 +34,8 @@ function App() {
           <Route path="/dashboard">
             <Dashboard />
           </Route>
-          <Route path="/department/:id">
-            <Dashboard />
+          <Route path="/departments/:departmentId">
+            <DepartmentPage />
           </Route>
         </Switch>
       )}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as departmentActions from '../../store/department';
 import OpenModalButton from '../OpenModalButton';
 import CreateEditDepartment from '../../components/departmentmanagement/createdepartment';
@@ -50,14 +51,13 @@ function LeftNavBar() {
     <div>
       <h2>Departments</h2>
       <ul>
-        {departments.map((department) => (
-          <li key={department.id} onClick={() => handleEditDepartmentClick(department.id)}>
-            {department.name}
-            <button onClick={() => handleDeleteDepartment(department.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-      <OpenModalButton
+  {departments.map((department) => (
+    <li key={department.id}>
+      <Link to={`/departments/${department.id}`}>{department.name}</Link>
+    </li>
+  ))}
+</ul>
+      {/* <OpenModalButton
         modalComponent={
           <CreateEditDepartment
             departmentToEdit={departmentToEdit}
@@ -69,7 +69,7 @@ function LeftNavBar() {
       />
 
       {/* Conditional rendering of the create/edit department modal */}
-      {isCreatingOrEditingDepartment && (
+      {/* {isCreatingOrEditingDepartment && (
         <div className="modal-background">
           <div className="modal">
             <CreateEditDepartment
@@ -78,7 +78,7 @@ function LeftNavBar() {
             />
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
