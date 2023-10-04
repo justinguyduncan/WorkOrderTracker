@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import Department
+from app.models import Department, UserDepartment
 from app.models.db import db
 from app.forms import DepartmentForm
 from flask_login import login_required
@@ -78,15 +78,16 @@ def update_department(id):
 @department_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_department(id):
-    # Get the department by ID
     department = Department.query.get(id)
-
-    # Ensure the department exists
     if not department:
         return jsonify({'error': 'Department not found'}), 404
 
-    # Delete the department from the database
+    # Option 1: Disassociate Users
+    # UserDepartment.query.filter_by(department_id=id).update({UserDepartment.department_id: None})
+
+    # Option 2: Delete Associations
+    UserDepartment.query.filter_by(department_id=id).delete()
+
     db.session.delete(department)
     db.session.commit()
-
-    return jsonify({'message': 'Department deleted successfully'})
+    return jsonify({'message': 'Department deleted successfully'}), 200

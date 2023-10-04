@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session'
 import departmentReducer from './department';
+import userDepartmentReducer from './user_department';
 import jobReducer from './job';
 import noteReducer from './note';
 
@@ -9,7 +10,8 @@ const rootReducer = combineReducers({
   session,
   departmentReducer,
   jobs: jobReducer,
-  noteReducer
+  noteReducer,
+  userDepartmentReducer
 });
 
 

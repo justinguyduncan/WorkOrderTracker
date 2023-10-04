@@ -33,6 +33,9 @@ function App() {
           <Route path="/dashboard">
             <Dashboard />
           </Route>
+          <Route path="/department/:id">
+            <Dashboard />
+          </Route>
         </Switch>
       )}
     </>

@@ -4,6 +4,7 @@
   // Action types
   export const CREATE_JOB_SUCCESS = 'CREATE_JOB_SUCCESS';
   export const FETCH_JOBS_SUCCESS = 'FETCH_JOBS_SUCCESS';
+  export const FILTER_JOBS = 'FILTER_JOBS';
   export const FETCH_JOB_SUCCESS = 'FETCH_JOB_SUCCESS';
   export const EDIT_JOB_SUCCESS = 'EDIT_JOB_SUCCESS';
   export const DELETE_JOB_SUCCESS = 'DELETE_JOB_SUCCESS';
@@ -13,6 +14,11 @@
   export const createJobSuccess = (job) => ({
     type: CREATE_JOB_SUCCESS,
     payload: job,
+  });
+
+  export const filterJobs = (filteredJobs) => ({
+    type: FILTER_JOBS,
+    payload: filteredJobs,
   });
 
   export const fetchJobsSuccess = (jobs) => ({
@@ -102,6 +108,7 @@
 // Define initial state
 const initialState = {
   jobs: [],
+  filteredJobs: []
 };
 
   // Reducer function
@@ -109,6 +116,12 @@ const initialState = {
     switch (action.type) {
       case FETCH_JOBS_SUCCESS:
         return { ...state, loading: false, jobs: action.payload, error: null };
+      case FILTER_JOBS:
+
+        return {
+          ...state,
+          filteredJobs: action.payload,
+        };
       case CREATE_JOB_SUCCESS:
         return {
           ...state,

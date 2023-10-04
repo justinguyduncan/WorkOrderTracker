@@ -10,10 +10,11 @@ class UserDepartment(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    department_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('departments.id')), nullable=False)
+    department_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('departments.id')), nullable=True)
 
     user = db.relationship('User', backref='user_departments')
-    department = db.relationship('Department', backref='user_departments')
+    department = db.relationship('Department', back_populates='user_departments')
+
 
     def to_dict(self):
         return {
