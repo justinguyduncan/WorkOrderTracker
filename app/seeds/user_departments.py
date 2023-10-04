@@ -8,9 +8,9 @@ def seed_user_departments():
     brian_department = UserDepartment(user_id=3, department_id=1)
     shane_department = UserDepartment(user_id=4, department_id=1)
     mike_department = UserDepartment(user_id=5, department_id=1)
-    ralph_department = UserDepartment(user_id=6, department_id=3)
-    luis_department = UserDepartment(user_id=7, department_id=5)
-    josh_department = UserDepartment(user_id=8, department_id=4)
+    ralph_department = UserDepartment(user_id=6, department_id=2)
+    luis_department = UserDepartment(user_id=7, department_id=4)
+    josh_department = UserDepartment(user_id=8, department_id=3)
 
 
     db.session.add(demo_department)
