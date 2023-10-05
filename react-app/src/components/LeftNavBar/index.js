@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import * as departmentActions from '../../store/department';
 import OpenModalButton from '../OpenModalButton';
 import CreateEditDepartment from '../../components/departmentmanagement/createdepartment';
+import Navigation from '../Navigation';
 import "./LeftNavBar.css"
 
 function LeftNavBar() {
@@ -49,6 +50,7 @@ function LeftNavBar() {
 
   return (
     <div>
+      <Navigation isLoaded={true}/>
       <h2>Departments</h2>
       <ul>
   {departments.map((department) => (

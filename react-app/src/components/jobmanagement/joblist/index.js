@@ -16,14 +16,22 @@ function JobList({ selectedDepartmentId }) {
   const [expandedJobId, setExpandedJobId] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [jobToEdit, setJobToEdit] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
-    if (sessionUser) {
-      dispatch(userDepartmentActions.fetchUserDepartments(sessionUser.id));
-      dispatch(jobActions.fetchJobsByDepartmentId(selectedDepartmentId));
-      dispatch(jobActions.fetchJobs());
-    }
+    const fetchData = async () => {
+      setIsLoading(true);
+      if (!selectedDepartmentId) {
+        await dispatch(jobActions.fetchJobs());
+      }else{
+        await dispatch(jobActions.fetchJobsByDepartmentId(selectedDepartmentId));
+      }
+    };
+
+    fetchData();
   }, [dispatch, sessionUser]);
+
 
   const toggleJobDetails = (jobId) => {
     setExpandedJobId((prevId) => (prevId === jobId ? null : jobId));
@@ -36,18 +44,13 @@ function JobList({ selectedDepartmentId }) {
     }
   };
 
- const filteredJobs = jobs.filter((job) => {
-  const jobDepartmentId = job.department_id;
-  return userDepartments.some((userDept) => userDept.department_id === jobDepartmentId);
-});
-
 
   if (!sessionUser) return <Redirect to="/" />;
 
   return (
     <div>
-      {filteredJobs.length > 0 ? (
-        filteredJobs.map((job) => (
+      {jobs.length > 0 ? (
+        jobs.map((job) => (
           <div key={job.id}>
             <h2 onClick={() => toggleJobDetails(job.id)}>{job.po_number} {job.title}</h2>
             {expandedJobId === job.id && (
