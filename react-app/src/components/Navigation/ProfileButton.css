@@ -1,0 +1,18 @@
+.username-button button{
+    display: flex;
+    color: black;
+    background-color: transparent;
+    border: transparent;
+    border-left: 1px solid darkgray;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    bottom:  0;
+    width: 100%;
+
+}
+
+.username-button button:hover{
+    cursor: pointer;
+    background-color: rgb(177, 177, 177);
+    opacity: 200%;
+}

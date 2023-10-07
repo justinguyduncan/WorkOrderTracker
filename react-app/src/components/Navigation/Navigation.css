@@ -1,7 +1,24 @@
 .profile-dropdown {
-  position: absolute;
+  bottom: unset;
 }
 
 .hidden {
   display: none;
+}
+
+.navigation-container{
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.navigation-container h1 img {
+  width: 35px;
+  height: auto; /* This ensures the aspect ratio is maintained */
+  display: flex;
+}
+
+.navigation-container ul{
+  list-style: none;
+  padding: unset;
 }

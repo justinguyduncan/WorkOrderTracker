@@ -19,7 +19,8 @@ function LoginFormModal() {
     if (data) {
       setErrors(data);
     } else {
-        closeModal(history.push('/dashboard'))
+        closeModal()
+        history.push('/dashboard')
     }
   };
 
@@ -51,6 +52,7 @@ function LoginFormModal() {
           />
         </label>
         <button type="submit">Log In</button>
+
         <button onClick={(e) => {
             setEmail('demo@aa.io');
             setPassword('password');

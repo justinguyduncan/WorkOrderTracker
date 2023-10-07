@@ -48,10 +48,6 @@ function Dashboard() {
       <div className="nav-bar">
         <h1>Work Orders</h1>
         <OpenModalButton modalComponent={<CreateJob />} buttonText="Create Job" />
-        <ProfileButton />
-      </div>
-      <div className="left-nav-bar">
-        <LeftNavBar />
       </div>
       <div className="job-list">
         <JobList jobs={filteredJobs} />

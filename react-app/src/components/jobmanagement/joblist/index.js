@@ -5,6 +5,9 @@ import * as jobActions from "../../../store/job";
 import * as userDepartmentActions from '../../../store/user_department'
 import CreateJob from "../createjob";
 import OpenModalButton from "../../OpenModalButton";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import './joblist.css'
 
 function JobList({ selectedDepartmentId }) {
   const dispatch = useDispatch();
@@ -17,6 +20,7 @@ function JobList({ selectedDepartmentId }) {
   const [isEditing, setIsEditing] = useState(false);
   const [jobToEdit, setJobToEdit] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
 
 
   useEffect(() => {
@@ -48,11 +52,11 @@ function JobList({ selectedDepartmentId }) {
   if (!sessionUser) return <Redirect to="/" />;
 
   return (
-    <div>
+    <div className="joblist-container">
       {jobs.length > 0 ? (
         jobs.map((job) => (
-          <div key={job.id}>
-            <h2 onClick={() => toggleJobDetails(job.id)}>{job.po_number} {job.title}</h2>
+          <div className='job-container' key={job.id}>
+            <h2 onClick={() => toggleJobDetails(job.id)}>{job.po_number} {job.title} <FontAwesomeIcon icon={faCaretDown} /></h2>
             {expandedJobId === job.id && (
               <div>
                 <p>

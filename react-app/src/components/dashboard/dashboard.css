@@ -1,11 +1,9 @@
-.dashboard-container {
-    display: grid;
-    grid-template-columns: 180px auto;
-    grid-template-rows: 80px auto;
-    gap: 20px;
-    height: 100vh;
-  }
+.nav-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-.ProfileButton{
-   content: center;
+.nav-bar button{
+    height: 30px;
 }

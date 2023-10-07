@@ -1,1 +1,23 @@
 /* TODO Add site wide styles */
+.app-container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.content-container{
+    flex: 2 ;
+    display: flex;
+    background-color: lightcyan;
+}
+
+.main-container{
+    flex: 1;
+    padding: 20px;
+    overflow: auto;
+    background-color: whitesmoke
+}
+
+body{
+    margin: 0;
+}
