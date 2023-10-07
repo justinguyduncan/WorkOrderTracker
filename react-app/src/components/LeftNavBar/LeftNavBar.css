@@ -47,7 +47,6 @@
 .department-container a:hover{
     cursor: pointer;
     background-color: rgb(177, 177, 177);
-    opacity: 200%;
 }
 
 

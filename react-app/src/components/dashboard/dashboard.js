@@ -44,10 +44,11 @@ function Dashboard() {
 
   return (
     <div className="dashboard-container">
-      <div className="ProfileButton"></div>
       <div className="nav-bar">
-        <h1>Work Orders</h1>
+        <h1>
+          Work Orders
         <OpenModalButton modalComponent={<CreateJob />} buttonText="Create Job" />
+        </h1>
       </div>
       <div className="job-list">
         <JobList jobs={filteredJobs} />
