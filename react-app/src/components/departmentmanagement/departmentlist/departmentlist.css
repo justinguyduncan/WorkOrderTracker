@@ -1,0 +1,9 @@
+.deptlist-container h1{
+    border-bottom: 3px solid darkgray;
+    justify-content: space-between;
+    display: flex;
+}
+
+.deptlist-container button{
+    margin-right: 0;
+}

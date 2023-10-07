@@ -90,10 +90,10 @@ def delete_job(id):
 
 
 # Retrieve jobs specific to a department
-@job_routes.route('/departments/<int:id>', methods=['GET'])
+@job_routes.route('/department/<int:department_id>', methods=['GET'])
 @login_required
-def get_department_jobs(id):
-    department = Department.query.get(id)
+def get_department_jobs(department_id):
+    department = Department.query.get(department_id)
 
     if not department:
         return jsonify({'message': 'Department not found'}), 404

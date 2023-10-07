@@ -5,8 +5,11 @@ import * as jobActions from "../../../store/job";
 import * as userDepartmentActions from '../../../store/user_department'
 import CreateJob from "../createjob";
 import OpenModalButton from "../../OpenModalButton";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import './joblist.css'
 
-function JobList() {
+function JobList({ selectedDepartmentId }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const jobs = useSelector((state) => state.jobs.jobs);
@@ -16,13 +19,23 @@ function JobList() {
   const [expandedJobId, setExpandedJobId] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [jobToEdit, setJobToEdit] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+
 
   useEffect(() => {
-    if (sessionUser) {
-      dispatch(userDepartmentActions.fetchUserDepartments(sessionUser.id));
-      dispatch(jobActions.fetchJobs());
-    }
+    const fetchData = async () => {
+      setIsLoading(true);
+      if (!selectedDepartmentId) {
+        await dispatch(jobActions.fetchJobs());
+      }else{
+        await dispatch(jobActions.fetchJobsByDepartmentId(selectedDepartmentId));
+      }
+    };
+
+    fetchData();
   }, [dispatch, sessionUser]);
+
 
   const toggleJobDetails = (jobId) => {
     setExpandedJobId((prevId) => (prevId === jobId ? null : jobId));
@@ -31,28 +44,21 @@ function JobList() {
   function deleteJob(jobId) {
     let answer = window.confirm("Are you sure you want to delete this Job?");
     if (answer) {
-        dispatch(jobActions.deleteJob(jobId))
+      dispatch(jobActions.deleteJob(jobId))
     }
-};
+  };
 
-const filteredJobs = jobs.filter((job) => {
-  const jobDepartmentId = job.department_id;
-  return userDepartments.some((userDept) => userDept.department_id === jobDepartmentId);
-});
 
   if (!sessionUser) return <Redirect to="/" />;
 
   return (
-    <div>
-      {filteredJobs.length > 0 ? (
-        filteredJobs.map((job) => (
-          <div key={job.id}>
-            <h2 onClick={() => toggleJobDetails(job.id)}>{job.po_number} {job.title}</h2>
+    <div className="joblist-container">
+      {jobs.length > 0 ? (
+        jobs.map((job) => (
+          <div className='job-container' key={job.id}>
+            <h2 onClick={() => toggleJobDetails(job.id)}>{job.po_number} {job.title} <FontAwesomeIcon icon={faCaretDown} /></h2>
             {expandedJobId === job.id && (
               <div>
-                {/* <p>
-                  <strong>PO Number:</strong> {job.po_number}
-                </p> */}
                 <p>
                   <strong>Description:</strong> {job.description}
                 </p>

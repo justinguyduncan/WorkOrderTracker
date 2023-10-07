@@ -3,20 +3,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import * as departmentActions from "../../../store/department";
 
-function CreateEditDepartment({ departmentToEdit }) {
+function CreateEditDepartment({ departmentToEdit}) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
+  const departmentName = useSelector((state) => {
+    const department = state.departmentReducer.departments.find(
+      (d) => d.id === departmentToEdit
+    );
+    return department ? department.name : "";
+  });
 
-  const [name, setName] = useState("");
+  const [name, setName] = useState(departmentToEdit?.name || "");
 
 
   useEffect(() => {
     if (departmentToEdit) {
-      setName(departmentToEdit.name || "");
+      setName(departmentName || "");
 
     }
   }, [departmentToEdit]);
 
+  console.log(departmentToEdit)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -27,9 +34,9 @@ function CreateEditDepartment({ departmentToEdit }) {
 
     if (departmentToEdit) {
 
-      dispatch(departmentActions.editDepartment(departmentToEdit.id, departmentData));
+      dispatch(departmentActions.editDepartment(departmentToEdit, departmentData));
     } else {
-      
+
       dispatch(departmentActions.createDepartment(departmentData));
     }
 

@@ -1,84 +1,89 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as departmentActions from '../../store/department';
 import OpenModalButton from '../OpenModalButton';
 import CreateEditDepartment from '../../components/departmentmanagement/createdepartment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
+
+import Navigation from '../Navigation';
 import "./LeftNavBar.css"
 
 function LeftNavBar() {
   const dispatch = useDispatch();
+  const sessionUser = useSelector((state) => state.session.user);
   const departments = useSelector((state) => state.departmentReducer.departments);
   const [isCreatingOrEditingDepartment, setIsCreatingOrEditingDepartment] = useState(false);
-  const [departmentToEdit, setDepartmentToEdit] = useState(null);
+  const [departmentIdToEdit, setDepartmentIdToEdit] = useState(null);
+const [departmentToEdit, setDepartmentToEdit] = useState(null);
 
   useEffect(() => {
 
     dispatch(departmentActions.fetchDepartments());
   }, [dispatch]);
 
-  const handleCreateDepartmentClick = () => {
 
-    setIsCreatingOrEditingDepartment(true);
-    setDepartmentToEdit(null);
-  };
 
   const handleEditDepartmentClick = (departmentId) => {
-
+    setDepartmentIdToEdit(departmentId);
     const department = departments.find((d) => d.id === departmentId);
     if (department) {
-
-      setIsCreatingOrEditingDepartment(true);
       setDepartmentToEdit(department);
     }
   };
 
+  const handleCreateDepartmentClick = () => {
+    setDepartmentToEdit(null);
+    setIsCreatingOrEditingDepartment(true);
+  };
 
   const handleModalClose = () => {
 
     setIsCreatingOrEditingDepartment(false);
   };
 
-  const handleDeleteDepartment = (departmentId) => {
 
-    let answer = window.confirm("Are you sure you want to delete this Job?");
-    if (answer) {
-      dispatch(departmentActions.deleteDepartment(departmentId));
-    }
-  };
 
-  return (
-    <div>
-      <h2>Departments</h2>
-      <ul>
+
+  return sessionUser && (
+    <div className='left-navbar'>
+      <div className='icon-user'>
+        <Navigation/>
+      </div>
+      <div className='department-container'>
+        <h2>Departments</h2>
         {departments.map((department) => (
-          <li key={department.id} onClick={() => handleEditDepartmentClick(department.id)}>
+          <Link key={department.id} to={`/departments/${department.id}`}>
             {department.name}
-            <button onClick={() => handleDeleteDepartment(department.id)}>Delete</button>
-          </li>
+            <div className='editDep-pencil'>
+            <OpenModalButton
+              buttonText={<FontAwesomeIcon icon={faPencil} />}
+              modalComponent={
+                <CreateEditDepartment
+                  departmentToEdit={department.id}
+                  onClose={handleModalClose}
+                  departmentId={departmentIdToEdit} // Pass departmentId
+                />
+              }
+              onClick={() => handleEditDepartmentClick(department.id)} // Pass department.id here
+              />
+              </div>
+          </Link>
         ))}
-      </ul>
-      <OpenModalButton
-        modalComponent={
-          <CreateEditDepartment
-            departmentToEdit={departmentToEdit}
-            onClose={handleModalClose}
-          />
-        }
-        buttonText="Create Department"
-        onClick={handleCreateDepartmentClick}
-      />
-
-      {/* Conditional rendering of the create/edit department modal */}
-      {isCreatingOrEditingDepartment && (
-        <div className="modal-background">
-          <div className="modal">
+      </div>
+      <div className='create-dept'>
+        <OpenModalButton
+          modalComponent={
             <CreateEditDepartment
               departmentToEdit={departmentToEdit}
               onClose={handleModalClose}
             />
-          </div>
-        </div>
-      )}
+          }
+          buttonText="Create Department"
+          onClick={handleCreateDepartmentClick}
+        />
+      </div>
     </div>
   );
 }

@@ -1,0 +1,82 @@
+.left-navbar {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    width: 200px;
+    align-items: center;
+    background-color: lightgray;
+    position: relative;
+
+}
+ .icon-user{
+    display: flex;
+    width: 100%;
+    padding-left: 10px;
+ }
+
+.department-container{
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray ;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.department-container h2{
+    display: flex;
+    color: black;
+    padding-bottom: 15px;
+
+}
+
+.department-container a  {
+    display: flex;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 0.01px solid darkgray;
+    border-top: 0.01px solid darkgray;
+
+
+}
+
+.department-container a:hover{
+    cursor: pointer;
+    background-color: rgb(177, 177, 177);
+    opacity: 200%;
+}
+
+
+.create-dept{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    width: 100%;
+
+}
+.create-dept button{
+    display: flex;
+    background-color: rgb(197, 197, 197);
+    color: black;
+    border: transparent;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: absolute;
+    bottom:  0;
+    width: 100%;
+}
+
+.create-dept button:hover{
+    cursor: pointer;
+    background-color: rgb(177, 177, 177);
+    opacity: 200%;
+}
+
+.editDep-pencil button{
+    justify-self: right;
+}
