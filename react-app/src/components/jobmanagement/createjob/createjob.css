@@ -1,4 +1,4 @@
-.login-container{
+.createjob-container{
     display: flex;
     flex-direction: column;
     padding-left: 50px;
@@ -8,23 +8,23 @@
     justify-content: center;
 }
 
-.login-container form {
+.createjob-container form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.login-container label {
+.createjob-container label {
     display: flex;
     font-size: 18px;
     flex-direction: column;
-    padding: 10px;
-    margin: 10px;
-    gap: 10px;
+    padding: 5px;
+    margin: 5px;
+    gap: 5px;
 }
 
-.login-container input {
+.createjob-container input {
     padding: 10px;
     border-radius: 4px;
 }
@@ -32,7 +32,7 @@
 
 
 
-.login-buttons button{
+.createjob-container button{
     display: flex;
     background-color: rgb(197, 197, 197);
     color: black;
@@ -42,10 +42,9 @@
     bottom:  0;
     width: 100%;
     margin: 10px;
-
 }
 
-.login-buttons button:hover{
+.createjob-container button:hover{
     cursor: pointer;
     background-color: rgb(177, 177, 177);
 }
