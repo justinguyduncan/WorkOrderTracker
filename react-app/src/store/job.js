@@ -74,7 +74,6 @@
     // console.log('inside fetchJobs');
       const response = await fetch('/api/jobs/');
       const data = await response.json();
-      console.log(data);
       if (response.ok) {
         dispatch(fetchJobsSuccess(data.jobs))}};
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import * as departmentActions from "../../../store/department";
+import "./createdept.css"
 
 function CreateEditDepartment({ departmentToEdit}) {
   const dispatch = useDispatch();
@@ -34,20 +35,22 @@ function CreateEditDepartment({ departmentToEdit}) {
 
     if (departmentToEdit) {
 
-      dispatch(departmentActions.editDepartment(departmentToEdit, departmentData));
+      await dispatch(departmentActions.editDepartment(departmentToEdit, departmentData));
+      dispatch(departmentActions.fetchDepartments())
     } else {
 
-      dispatch(departmentActions.createDepartment(departmentData));
+      await dispatch(departmentActions.createDepartment(departmentData));
+      dispatch(departmentActions.fetchDepartments())
     }
 
     closeModal();
   };
 
   return (
-    <div>
+    <div className="createdept-container">
       <h2>{departmentToEdit ? "Edit Department" : "Create a New Department"}</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="createdept-form">
           <label htmlFor="name">Department Name</label>
           <input
             type="text"

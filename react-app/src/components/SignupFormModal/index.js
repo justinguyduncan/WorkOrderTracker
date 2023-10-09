@@ -17,7 +17,7 @@ function SignupFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      const data = await dispatch(signUp(firstName, lastName, email, password)); // Updated the dispatch
+      const data = await dispatch(signUp(firstName, lastName, email, password)); 
       if (data) {
         setErrors(data);
       } else {
@@ -29,7 +29,7 @@ function SignupFormModal() {
   };
 
   return (
-    <>
+    <div className="signup-container">
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <ul>
@@ -81,10 +81,14 @@ function SignupFormModal() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
+
         </label>
+
         <button type="submit">Sign Up</button>
+
       </form>
-    </>
+
+    </div>
   );
 }
 

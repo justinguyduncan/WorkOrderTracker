@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useModal } from '../../../context/Modal';
 import { useSelector } from 'react-redux';
 import * as jobActions from '../../../store/job';
+import "./createjob.css"
 
 
 function CreateJob({ jobToEdit }) {
@@ -44,18 +45,19 @@ function CreateJob({ jobToEdit }) {
     };
     // console.log(jobData)
     if (jobToEdit) {
-      dispatch(jobActions.editJob(jobToEdit.id, jobData));
+      await dispatch(jobActions.editJob(jobToEdit.id, jobData));
+      dispatch(jobActions.fetchJob())
     } else {
-      dispatch(jobActions.createJob(jobData));
+      await dispatch(jobActions.createJob(jobData));
+      dispatch(jobActions.fetchJobs())
     }
     closeModal();
   };
 
   return (
-    <div>
+    <div className='createjob-container'>
       <h2>{jobToEdit ? 'Edit Job' : 'Create a New Job'}</h2>
       <form onSubmit={handleSubmit}>
-        <div>
           <label htmlFor="title">Job Title</label>
           <input
             type="text"
@@ -64,8 +66,7 @@ function CreateJob({ jobToEdit }) {
             onChange={(e) => setTitle(e.target.value)}
             required
           />
-        </div>
-        <div>
+
           <label htmlFor="poNumber">PO Number</label>
           <input
             type="number"
@@ -74,8 +75,6 @@ function CreateJob({ jobToEdit }) {
             onChange={(e) => setPoNumber(e.target.value)}
             required
           />
-        </div>
-        <div>
           <label htmlFor="description">Job Description</label>
             <textarea
               id="description"
@@ -83,8 +82,6 @@ function CreateJob({ jobToEdit }) {
             onChange={(e) => setDescription(e.target.value)}
             required
             ></textarea>
-          </div>
-        <div>
           <label htmlFor="department">Department</label>
           <select
             id="department"
@@ -99,8 +96,6 @@ function CreateJob({ jobToEdit }) {
               </option>
             ))}
           </select>
-        </div>
-        <div>
           <label htmlFor="status">Status</label>
           <select
             id="status"
@@ -114,9 +109,7 @@ function CreateJob({ jobToEdit }) {
             <option value="Install">Install</option>
             <option value="Ready For Delivery">Ready For Delivery</option>
             <option value="Completed">Completed</option>
-            {/* Add other status options as needed */}
           </select>
-        </div>
         <button type="submit">{jobToEdit ? 'Save Changes' : 'Create Job'}</button>
       </form>
     </div>

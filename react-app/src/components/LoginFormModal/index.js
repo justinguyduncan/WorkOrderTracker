@@ -25,7 +25,7 @@ function LoginFormModal() {
   };
 
   return (
-    <>
+    <div className="login-container">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <ul>
@@ -51,15 +51,19 @@ function LoginFormModal() {
             required
           />
         </label>
+        <div className="login-buttons">
+
         <button type="submit">Log In</button>
 
         <button onClick={(e) => {
             setEmail('demo@aa.io');
             setPassword('password');
           }}>Log In as Demo User</button>
+          </div>
       </form>
-    </>
+    </div>
   );
 }
 
 export default LoginFormModal;
+
