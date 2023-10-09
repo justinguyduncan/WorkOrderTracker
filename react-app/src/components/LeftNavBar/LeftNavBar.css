@@ -73,7 +73,6 @@
 .create-dept button:hover{
     cursor: pointer;
     background-color: rgb(177, 177, 177);
-    opacity: 200%;
 }
 
 .editDep-pencil button{

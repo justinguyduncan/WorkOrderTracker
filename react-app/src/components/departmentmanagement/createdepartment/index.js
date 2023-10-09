@@ -34,10 +34,12 @@ function CreateEditDepartment({ departmentToEdit}) {
 
     if (departmentToEdit) {
 
-      dispatch(departmentActions.editDepartment(departmentToEdit, departmentData));
+      await dispatch(departmentActions.editDepartment(departmentToEdit, departmentData));
+      dispatch(departmentActions.fetchDepartments())
     } else {
 
-      dispatch(departmentActions.createDepartment(departmentData));
+      await dispatch(departmentActions.createDepartment(departmentData));
+      dispatch(departmentActions.fetchDepartments())
     }
 
     closeModal();

@@ -44,9 +44,11 @@ function CreateJob({ jobToEdit }) {
     };
     // console.log(jobData)
     if (jobToEdit) {
-      dispatch(jobActions.editJob(jobToEdit.id, jobData));
+      await dispatch(jobActions.editJob(jobToEdit.id, jobData));
+      dispatch(jobActions.fetchJob())
     } else {
-      dispatch(jobActions.createJob(jobData));
+      await dispatch(jobActions.createJob(jobData));
+      dispatch(jobActions.fetchJobs())
     }
     closeModal();
   };
@@ -114,7 +116,6 @@ function CreateJob({ jobToEdit }) {
             <option value="Install">Install</option>
             <option value="Ready For Delivery">Ready For Delivery</option>
             <option value="Completed">Completed</option>
-            {/* Add other status options as needed */}
           </select>
         </div>
         <button type="submit">{jobToEdit ? 'Save Changes' : 'Create Job'}</button>
