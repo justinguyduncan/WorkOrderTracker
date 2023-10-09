@@ -8,7 +8,6 @@ import Navigation from "./components/Navigation";
 import LeftNavBar from "./components/LeftNavBar";
 import Dashboard from "./components/dashboard/dashboard";
 import DepartmentPage from "./components/departmentmanagement/departmentlist";
-import * as departmentactions from "./store/department"
 import SplashPage from "./components/splashpage"
 
 function App() {
@@ -16,7 +15,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
-    dispatch(departmentactions.fetchDepartments())
+
   }, [dispatch]);
 
   return (
