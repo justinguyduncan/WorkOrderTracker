@@ -8,3 +8,8 @@
 .deptlist-container button{
     margin-right: 0;
 }
+
+.title-container button{
+    padding: 5px;
+    margin-left: 15px;
+}

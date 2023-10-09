@@ -16,7 +16,7 @@ function LeftNavBar() {
   const departments = useSelector((state) => state.departmentReducer.departments);
   const [isCreatingOrEditingDepartment, setIsCreatingOrEditingDepartment] = useState(false);
   const [departmentIdToEdit, setDepartmentIdToEdit] = useState(null);
-const [departmentToEdit, setDepartmentToEdit] = useState(null);
+  const [departmentToEdit, setDepartmentToEdit] = useState(null);
 
   useEffect(() => {
     if(sessionUser){
@@ -58,7 +58,7 @@ const [departmentToEdit, setDepartmentToEdit] = useState(null);
         {departments.map((department) => (
           <Link key={department.id} to={`/departments/${department.id}`}>
             {department.name}
-            <div className='editDep-pencil'>
+            {/* <div className='editDep-pencil'>
             <OpenModalButton
               buttonText={<FontAwesomeIcon icon={faPencil} />}
               modalComponent={
@@ -70,7 +70,7 @@ const [departmentToEdit, setDepartmentToEdit] = useState(null);
               }
               onClick={() => handleEditDepartmentClick(department.id)} // Pass department.id here
               />
-              </div>
+              </div> */}
           </Link>
         ))}
       </div>
