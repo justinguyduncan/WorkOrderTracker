@@ -19,8 +19,8 @@ function Dashboard() {
 
   useEffect(() => {
     if (sessionUser) {
-      // Fetch user's departments
-      dispatch(userDepartmentActions.fetchUserDepartments(sessionUser.id));
+      // // Fetch user's departments
+      // dispatch(userDepartmentActions.fetchUserDepartments(sessionUser.id));
       // Fetch all jobs
       dispatch(jobActions.fetchJobs());
     }
@@ -28,14 +28,12 @@ function Dashboard() {
 
   useEffect(() => {
     if (userDepartments.length > 0 && jobs.length > 0) {
-      // Get an array of department IDs for the user
       const userDepartmentIds = userDepartments.map((userDept) => userDept.department_id);
 
-      // Filter jobs based on user's department
       const filtered = jobs.filter((job) => userDepartmentIds.includes(job.department_id));
       setFilteredJobs(filtered);
 
-      // Dispatch the action to update filtered jobs in Redux state
+      
       dispatch(jobActions.filterJobs(filtered));
     }
   }, [userDepartments, jobs]);
