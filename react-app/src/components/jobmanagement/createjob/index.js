@@ -46,7 +46,7 @@ function CreateJob({ jobToEdit }) {
     // console.log(jobData)
     if (jobToEdit) {
       await dispatch(jobActions.editJob(jobToEdit.id, jobData));
-      dispatch(jobActions.fetchJob())
+      dispatch(jobActions.fetchJobs())
     } else {
       await dispatch(jobActions.createJob(jobData));
       dispatch(jobActions.fetchJobs())
