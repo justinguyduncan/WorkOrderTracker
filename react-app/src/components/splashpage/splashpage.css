@@ -23,3 +23,16 @@
     text-align: center;
 
 }
+
+.splash-header button{
+    background-color: rgb(197, 197, 197);
+    color: black;
+    border: transparent;
+    padding: 15px;
+    margin: 10px;
+}
+
+.splash-header button:hover{
+    cursor: pointer;
+    background-color: rgb(177, 177, 177);
+}
