@@ -34,6 +34,7 @@ function DepartmentPage() {
       if (answer) {
         dispatch(departmentActions.deleteDepartment(departmentId)).then(() => {
           history.push('/dashboard');
+          dispatch(departmentActions.fetchDepartments());
         });
       }
     }

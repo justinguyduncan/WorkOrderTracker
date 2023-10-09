@@ -19,9 +19,11 @@ function LeftNavBar() {
 const [departmentToEdit, setDepartmentToEdit] = useState(null);
 
   useEffect(() => {
+    if(sessionUser){
+      dispatch(departmentActions.fetchDepartments());
+    }
 
-    dispatch(departmentActions.fetchDepartments());
-  }, [dispatch]);
+  }, [dispatch, sessionUser]);
 
 
 
