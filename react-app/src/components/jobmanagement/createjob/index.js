@@ -47,6 +47,7 @@ function CreateJob({ jobToEdit }) {
     if (jobToEdit) {
       await dispatch(jobActions.editJob(jobToEdit.id, jobData));
       dispatch(jobActions.fetchJobs())
+      history.push('/dashboard')
     } else {
       await dispatch(jobActions.createJob(jobData));
       dispatch(jobActions.fetchJobs())
