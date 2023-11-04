@@ -37,6 +37,9 @@ function SplashPage() {
       <div className="splash-body">
         <p>Welcome to JobTracker, a platform desgined to streamline and optimize the process of managing work orders and tasks within your organization. At JobTracker, we understand the challenges of keeping track of work orders, assigning tasks, and ensuring everything runs smoothly. That's why we've created an intuitive and efficient solution to simplify your workflow. With JobTracker, you can effortlessly create, manage, and assign tasks to specific departments or team members.</p>
       </div>
+      {/* <div className="P1"></div>
+      <div className="P2"></div>
+      <div className="Footer"></div> */}
     </div>
   );
 }

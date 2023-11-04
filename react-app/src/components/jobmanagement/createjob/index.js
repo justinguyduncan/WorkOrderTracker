@@ -107,6 +107,7 @@ function CreateJob({ jobToEdit }) {
             <option value="">Select Status</option>
             <option value="In Progress">In Progress</option>
             <option value="Design">Design</option>
+            <option value="Hold">Hold</option>
             <option value="Install">Install</option>
             <option value="Ready For Delivery">Ready For Delivery</option>
             <option value="Completed">Completed</option>

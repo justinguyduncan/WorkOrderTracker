@@ -15,7 +15,7 @@ function JobList({ selectedDepartmentId }) {
   const jobs = useSelector((state) => state.jobs.jobs);
   const history = useHistory();
   const departments = useSelector((state) => state.departmentReducer.departments);
-  const userDepartments = useSelector((state) => state.userDepartmentReducer.departments);
+  // const userDepartments = useSelector((state) => state.userDepartmentReducer.departments);
   const [expandedJobId, setExpandedJobId] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [jobToEdit, setJobToEdit] = useState(null);
