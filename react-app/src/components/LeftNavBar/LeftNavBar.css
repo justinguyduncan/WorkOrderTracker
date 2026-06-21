@@ -3,22 +3,66 @@
     flex-direction: column;
     padding: 8px;
     width: 200px;
-    height: 99%;
+    height: 100%;
     align-items: center;
     background-color: var(--bg-sidebar);
     border-right: 0.5px solid var(--border);
     position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    transition: transform 0.25s ease;
 }
 
 .icon-user {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
     padding: 12px 10px 10px;
     color: var(--text-primary);
     border-bottom: 0.5px solid var(--border);
     margin-bottom: 8px;
-    gap: 6px;
+}
+
+.sidebar-close-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px 6px;
+    line-height: 1;
+}
+
+.sidebar-close-btn:hover {
+    color: var(--text-primary);
+}
+
+.hamburger-btn {
+    display: none;
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 200;
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    color: var(--text-primary);
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
 }
 
 .department-container {
@@ -82,4 +126,28 @@
 
 .editDep-pencil button {
     justify-self: right;
+}
+
+@media (max-width: 768px) {
+    .left-navbar {
+        transform: translateX(-100%);
+        width: 240px;
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .left-navbar.sidebar-open {
+        transform: translateX(0);
+    }
+
+    .sidebar-close-btn {
+        display: block;
+    }
+
+    .hamburger-btn {
+        display: block;
+    }
+
+    .sidebar-overlay {
+        display: block;
+    }
 }

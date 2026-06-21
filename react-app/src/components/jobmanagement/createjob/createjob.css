@@ -1,13 +1,15 @@
 .createjob-container {
   padding: 28px 32px 24px;
   width: 480px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .createjob-container h2 {
   margin: 0 0 20px;
   font-size: 1.3rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--text-primary);
 }
 
 .createjob-container form {
@@ -26,7 +28,7 @@
   gap: 5px;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #555;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -35,11 +37,11 @@
 .createjob-container select,
 .createjob-container textarea {
   padding: 9px 11px;
-  border: 1px solid #d0d0d0;
+  border: 1px solid var(--border-input);
   border-radius: 6px;
   font-size: 0.95rem;
-  color: #1a1a1a;
-  background: #fafafa;
+  color: var(--text-primary);
+  background: var(--bg-input);
   width: 100%;
   box-sizing: border-box;
   transition: border-color 0.15s;
@@ -50,7 +52,7 @@
 .createjob-container textarea:focus {
   outline: none;
   border-color: #457b9d;
-  background: #fff;
+  background: var(--bg-input);
 }
 
 .createjob-container textarea {
@@ -106,4 +108,23 @@
   background: #8b3a8b;
   border-color: #8b3a8b;
   color: #fff;
+}
+
+@media (max-width: 768px) {
+  .createjob-container {
+    width: 100%;
+    padding: 20px 16px;
+  }
+
+  .createjob-container form {
+    grid-template-columns: 1fr;
+  }
+
+  .createjob-container .field-full {
+    grid-column: 1;
+  }
+
+  .createjob-container button {
+    grid-column: 1;
+  }
 }

@@ -209,6 +209,64 @@
 .status-ready         { background-color: #1e7068; }
 .status-completed     { background-color: #147a5c; }
 
+@media (max-width: 768px) {
+  .job-row {
+    padding: 12px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .job-row-main {
+    flex: 1;
+    min-width: 0;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .job-title {
+    font-size: 0.9rem;
+    word-break: break-word;
+  }
+
+  .job-row-meta {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: flex-start;
+  }
+
+  .caret {
+    position: static;
+    transform: none;
+    margin-left: auto;
+    align-self: flex-start;
+    margin-top: 2px;
+  }
+
+  .caret-open {
+    transform: rotate(180deg);
+  }
+
+  .due-date-chip {
+    font-size: 0.7rem;
+  }
+
+  .status-badge {
+    font-size: 0.72rem;
+    padding: 2px 8px;
+  }
+
+  .job-detail-actions {
+    flex-direction: column;
+  }
+
+  .job-detail-actions button,
+  .job-container button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 /* Dark theme row colors */
 body[data-theme="dark"] .job-high-priority { background-color: #2a0a0a; border-left: 3px solid #c0392b; }
 body[data-theme="dark"] .due-overdue       { background-color: #2a1018; border-left: 3px solid #a83240; }

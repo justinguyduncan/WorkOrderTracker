@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import * as departmentActions from '../../store/department';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+import { faSun, faMoon, faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import Navigation from '../Navigation';
-import ProfileButton from '../Navigation/ProfileButton';
 import { useTheme } from '../../context/Theme';
 import "./LeftNavBar.css";
 
@@ -14,6 +13,8 @@ function LeftNavBar() {
   const sessionUser = useSelector((state) => state.session.user);
   const { theme, toggleTheme } = useTheme();
   const departments = useSelector((state) => state.departmentReducer.departments);
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     if (sessionUser) {
@@ -21,24 +22,42 @@ function LeftNavBar() {
     }
   }, [dispatch, sessionUser]);
 
-  return sessionUser && (
-    <div className='left-navbar'>
-      <div className='icon-user'>
-        <Navigation />
-      </div>
-      <div className='department-container'>
-        <h2>Departments</h2>
-        {departments.map((department) => (
-          <Link key={department.id} to={`/departments/${department.id}`}>
-            {department.name}
-          </Link>
-        ))}
-      </div>
-      <button className='theme-toggle' onClick={toggleTheme}>
-        <FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} />
-        {theme === 'dark' ? ' Light Mode' : ' Dark Mode'}
+  // Close sidebar on navigation
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
+  if (!sessionUser) return null;
+
+  return (
+    <>
+      <button className='hamburger-btn' onClick={() => setIsOpen(true)}>
+        <FontAwesomeIcon icon={faBars} />
       </button>
-    </div>
+
+      {isOpen && <div className='sidebar-overlay' onClick={() => setIsOpen(false)} />}
+
+      <div className={`left-navbar ${isOpen ? 'sidebar-open' : ''}`}>
+        <div className='icon-user'>
+          <Navigation />
+          <button className='sidebar-close-btn' onClick={() => setIsOpen(false)}>
+            <FontAwesomeIcon icon={faXmark} />
+          </button>
+        </div>
+        <div className='department-container'>
+          <h2>Departments</h2>
+          {departments.map((department) => (
+            <Link key={department.id} to={`/departments/${department.id}`}>
+              {department.name}
+            </Link>
+          ))}
+        </div>
+        <button className='theme-toggle' onClick={toggleTheme}>
+          <FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} />
+          {theme === 'dark' ? ' Light Mode' : ' Dark Mode'}
+        </button>
+      </div>
+    </>
   );
 }
 

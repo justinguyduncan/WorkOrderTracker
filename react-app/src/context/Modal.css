@@ -27,6 +27,8 @@
   border: 0.5px solid #2a2a3a;
   overflow: auto;
   border-radius: 10px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 32px);
 }
 
 body[data-theme="light"] #modal-content {

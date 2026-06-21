@@ -2,6 +2,13 @@
     margin-left: 210px;
 }
 
+@media (max-width: 768px) {
+    .deptlist-container {
+        margin-left: 0;
+        padding-top: 56px;
+    }
+}
+
 .deptlist-container h1{
     border-bottom: 3px solid darkgray;
     justify-content: space-between;

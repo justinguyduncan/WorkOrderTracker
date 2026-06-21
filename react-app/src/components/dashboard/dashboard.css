@@ -2,6 +2,15 @@
     margin-left: 210px;
 }
 
+@media (max-width: 768px) {
+    .dashboard-container {
+        margin-left: 0;
+        padding-top: 56px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
+
 .nav-bar {
     display: flex;
     align-items: center;
