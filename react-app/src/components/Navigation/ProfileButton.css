@@ -1,17 +1,101 @@
-.username-button button{
-    display: flex;
-    color: black;
-    background-color: transparent;
-    border: transparent;
-    border-left: 1px solid darkgray;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    bottom:  0;
-    width: 100%;
-
+.profile-name-btn {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: color 0.12s;
+  user-select: none;
+  white-space: nowrap;
 }
 
-.username-button button:hover{
-    cursor: pointer;
-    background-color: rgb(177, 177, 177);
+.profile-name-btn:hover {
+  color: var(--text-secondary);
+}
+
+.username-button button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Account modal */
+.account-modal {
+  padding: 24px;
+  width: 300px;
+}
+
+.account-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.account-avatar-lg {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #8b3a8b;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.account-name {
+  margin: 0 0 3px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.account-email {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.account-modal-divider {
+  height: 0.5px;
+  background: var(--border);
+  margin-bottom: 16px;
+}
+
+.account-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.account-modal-actions button {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  border: 0.5px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  transition: background 0.15s;
+}
+
+.account-modal-actions button:hover {
+  background: var(--btn-hover-bg);
+  color: var(--btn-hover-text);
+}
+
+.account-logout-btn {
+  color: #e63946 !important;
+  border-color: rgba(230, 57, 70, 0.3) !important;
+}
+
+.account-logout-btn:hover {
+  background: rgba(230, 57, 70, 0.1) !important;
+  color: #e63946 !important;
 }

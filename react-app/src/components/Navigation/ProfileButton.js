@@ -1,76 +1,60 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/session";
+import { useModal } from "../../context/Modal";
 import OpenModalButton from "../OpenModalButton";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
-import "./ProfileButton.css"
+import CreateEditDepartment from "../departmentmanagement/createdepartment";
+import "./ProfileButton.css";
 
-function ProfileButton() {
+function AccountModal() {
   const dispatch = useDispatch();
-  const [showMenu, setShowMenu] = useState(false);
-  const ulRef = useRef();
+  const { closeModal } = useModal();
   const user = useSelector(state => state.session.user);
-
-  const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
-  };
-
-  useEffect(() => {
-    if (!showMenu) return;
-
-    const closeMenu = (e) => {
-      if (!ulRef.current.contains(e.target)) {
-        setShowMenu(false);
-      }
-    };
-
-    document.addEventListener("click", closeMenu);
-
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
 
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    closeModal();
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-  const closeMenu = () => setShowMenu(false);
+  if (!user) return null;
 
-  return user &&(
-    <>
-    <div className="username-button">
-      <button onClick={openMenu}>
-      { user.short_name}
-      </button>
+  const initials = user.name?.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || '?';
+
+  return (
+    <div className="account-modal">
+      <div className="account-modal-header">
+        <div className="account-avatar-lg">{initials}</div>
+        <div>
+          <p className="account-name">{user.name}</p>
+          <p className="account-email">{user.email}</p>
+        </div>
+      </div>
+      <div className="account-modal-divider" />
+      <div className="account-modal-actions">
+        <OpenModalButton
+          modalComponent={<CreateEditDepartment />}
+          buttonText="Create Department"
+          className="account-action-btn"
+        />
+        <button className="account-logout-btn" onClick={handleLogout}>Log Out</button>
+      </div>
     </div>
-      <ul className={ulClassName} ref={ulRef}>
-        {user ? (
-          <>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={handleLogout}>Log Out</button>
-            </li>
-          </>
-        ) : (
-          <>
-            <OpenModalButton
-              buttonText="Log In"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
+  );
+}
 
-            <OpenModalButton
-              buttonText="Sign Up"
-              onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
-          </>
-        )}
-      </ul>
-    </>
+function ProfileButton() {
+  const user = useSelector(state => state.session.user);
+  const { setModalContent } = useModal();
+
+  if (!user) return null;
+
+  const openAccount = () => setModalContent(<AccountModal />);
+
+  return (
+    <span className="profile-name-btn" onClick={openAccount}>
+      {user.short_name}
+    </span>
   );
 }
 

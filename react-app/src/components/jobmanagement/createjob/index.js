@@ -18,6 +18,8 @@ function CreateJob({ jobToEdit }) {
   const [poNumber, setPoNumber] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('');
+  const [install, setInstall] = useState(false);
+  const [dueDate, setDueDate] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('');
   const departments = useSelector((state) => state.departmentReducer.departments);
   // console.log(jobToEdit)
@@ -28,6 +30,8 @@ function CreateJob({ jobToEdit }) {
       setPoNumber(jobToEdit.po_number || '');
       setDescription(jobToEdit.description || '');
       setStatus(jobToEdit.status || '');
+      setInstall(jobToEdit.install || false);
+      setDueDate(jobToEdit.due_date || '');
       setSelectedDepartment(jobToEdit.department_id || '');
     }
   }, [jobToEdit]);
@@ -41,6 +45,8 @@ function CreateJob({ jobToEdit }) {
       po_number: poNumber,
       description,
       status,
+      install,
+      due_date: dueDate,
       department_id: selectedDepartment,
     };
     // console.log(jobData)
@@ -59,7 +65,8 @@ function CreateJob({ jobToEdit }) {
     <div className='createjob-container'>
       <h2>{jobToEdit ? 'Edit Job' : 'Create a New Job'}</h2>
       <form onSubmit={handleSubmit}>
-          <label htmlFor="title">Job Title</label>
+        <label className="field-full" htmlFor="title">
+          Job Title
           <input
             type="text"
             id="title"
@@ -67,8 +74,10 @@ function CreateJob({ jobToEdit }) {
             onChange={(e) => setTitle(e.target.value)}
             required
           />
+        </label>
 
-          <label htmlFor="poNumber">PO Number</label>
+        <label htmlFor="poNumber">
+          PO Number
           <input
             type="number"
             id="poNumber"
@@ -76,14 +85,20 @@ function CreateJob({ jobToEdit }) {
             onChange={(e) => setPoNumber(e.target.value)}
             required
           />
-          <label htmlFor="description">Job Description</label>
-            <textarea
-              id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-            ></textarea>
-          <label htmlFor="department">Department</label>
+        </label>
+
+        <label htmlFor="dueDate">
+          Due Date
+          <input
+            type="date"
+            id="dueDate"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
+          />
+        </label>
+
+        <label htmlFor="department">
+          Department
           <select
             id="department"
             value={selectedDepartment}
@@ -97,21 +112,45 @@ function CreateJob({ jobToEdit }) {
               </option>
             ))}
           </select>
-          <label htmlFor="status">Status</label>
-          <select
-            id="status"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
+        </label>
+
+        <label htmlFor="status">
+          Status
+          <div className="status-install-row">
+            <select
+              id="status"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              required
+            >
+              <option value="">Select Status</option>
+              <option value="High Priority">High Priority</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Design">Design</option>
+              <option value="Hold">Hold</option>
+              <option value="Ready For Delivery">Ready For Delivery</option>
+              <option value="Completed">Completed</option>
+            </select>
+            <button
+              type="button"
+              className={`install-tag ${install ? 'install-tag-active' : ''}`}
+              onClick={() => setInstall(!install)}
+            >
+              Install
+            </button>
+          </div>
+        </label>
+
+        <label className="field-full" htmlFor="description">
+          Description
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             required
-          >
-            <option value="">Select Status</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Design">Design</option>
-            <option value="Hold">Hold</option>
-            <option value="Install">Install</option>
-            <option value="Ready For Delivery">Ready For Delivery</option>
-            <option value="Completed">Completed</option>
-          </select>
+          />
+        </label>
+
         <button type="submit">{jobToEdit ? 'Save Changes' : 'Create Job'}</button>
       </form>
     </div>

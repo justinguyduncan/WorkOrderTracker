@@ -13,6 +13,8 @@ class Job(db.Model):
     po_number = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text, nullable=False)
     status = db.Column(db.String(255), nullable=False)
+    install = db.Column(db.Boolean, nullable=False, default=False)
+    due_date = db.Column(db.Date, nullable=True)
     department_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('departments.id')), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -26,6 +28,8 @@ class Job(db.Model):
             'po_number': self.po_number,
             'description': self.description,
             'status': self.status,
+            'install': self.install,
+            'due_date': self.due_date.strftime('%Y-%m-%d') if self.due_date else None,
             'department_id': self.department_id,
             'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
             'updated_at': self.updated_at.strftime('%Y-%m-%d %H:%M:%S'),

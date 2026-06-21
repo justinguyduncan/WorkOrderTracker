@@ -17,6 +17,7 @@ def create_job():
         po_number = form.po_number.data
         description = form.description.data
         status = form.status.data
+        due_date = form.due_date.data
         department_id = form.department_id.data
 
         job = Job(
@@ -24,6 +25,8 @@ def create_job():
             po_number=po_number,
             description=description,
             status=status,
+            install=bool(request.json.get('install', False)),
+            due_date=due_date,
             department_id=department_id,
         )
         db.session.add(job)
@@ -66,6 +69,8 @@ def update_job(id):
         job.po_number = form.po_number.data
         job.description = form.description.data
         job.status = form.status.data
+        job.install = bool(request.json.get('install', False))
+        job.due_date = form.due_date.data
         job.department_id = form.department_id.data
 
         db.session.commit()

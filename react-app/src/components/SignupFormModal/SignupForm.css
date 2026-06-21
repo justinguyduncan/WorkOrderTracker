@@ -1,53 +1,70 @@
-.signup-container{
-    display: flex;
-    flex-direction: column;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-bottom: 30px;
-    align-items: center;
-    justify-content: center;
+.signup-container {
+  padding: 28px 32px 24px;
+  width: 340px;
+}
+
+.signup-container h1 {
+  margin: 0 0 20px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 .signup-container form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.signup-container ul {
+  color: #e63946;
+  font-size: 0.85rem;
+  padding-left: 16px;
+  margin: 0 0 8px;
 }
 
 .signup-container label {
-    display: flex;
-    font-size: 18px;
-    flex-direction: column;
-    padding: 5px;
-    margin: 5px;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .signup-container input {
-    padding: 10px;
-    border-radius: 4px;
+  padding: 9px 11px;
+  border: 1px solid var(--border-input);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: var(--bg-input);
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s;
 }
 
-
-.signup-container button{
-    background-color: rgb(197, 197, 197);
+.signup-container input:focus {
+  border-color: #8b3a8b;
 }
 
-
-.signup-container button{
-    display: flex;
-    background-color: rgb(197, 197, 197);
-    color: black;
-    border: transparent;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    bottom:  0;
-    width: 100%;
+.signup-container button {
+  padding: 11px;
+  background-color: #8b3a8b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 4px;
+  transition: background 0.15s;
 }
 
-.signup-container button:hover{
-    cursor: pointer;
-    background-color: rgb(177, 177, 177);
+.signup-container button:hover {
+  background-color: #6e2d6e;
 }
-

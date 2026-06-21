@@ -6,13 +6,16 @@ import SignupFormModal from "../SignupFormModal";
 import './Navigation.css';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';import ProfileButton from './ProfileButton';
-import Icon from './work-order-management-1.png';
+import LogoLight from '../../assets/logo-light.png';
+import LogoDark from '../../assets/logo-dark.png';
+import { useTheme } from '../../context/Theme';
 
 
 function Navigation({ isLoaded }){
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
 	const sessionUser = useSelector(state => state.session.user);
+	const { theme } = useTheme();
 
 
 
@@ -27,7 +30,7 @@ function Navigation({ isLoaded }){
 
 	return (
 		<div className='navigation-container'>
-			<h1><NavLink exact to="/dashboard"><img src={Icon} alt="Work Order Management" /></NavLink></h1>
+			<h1><NavLink exact to="/dashboard"><img src={theme === 'dark' ? LogoLight : LogoDark} alt="Zumn" /></NavLink></h1>
 		<ul>
 
 			{isLoaded && !sessionUser ? (
@@ -44,7 +47,7 @@ function Navigation({ isLoaded }){
 				 modalComponent={<SignupFormModal />}
 			   />
 			   </div>
-			):(
+			) : (
 				<ProfileButton/>
 			)}
 		</ul>

@@ -5,77 +5,81 @@
     width: 200px;
     height: 99%;
     align-items: center;
-    background-color: lightgray;
+    background-color: var(--bg-sidebar);
+    border-right: 0.5px solid var(--border);
     position: fixed;
-
 }
- .icon-user{
-    display: flex;
-    width: 100%;
-    padding-left: 10px;
- }
 
-.department-container{
+.icon-user {
     display: flex;
     flex-direction: column;
-    background-color: lightgray ;
+    width: 100%;
+    padding: 12px 10px 10px;
+    color: var(--text-primary);
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 8px;
+    gap: 6px;
+}
+
+.department-container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-sidebar);
     width: 100%;
     justify-content: center;
     align-items: center;
-
 }
 
-.department-container h2{
+.department-container h2 {
     display: flex;
-    color: black;
-    padding-bottom: 15px;
-
+    color: var(--text-sidebar-heading);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding-bottom: 10px;
 }
 
-.department-container a  {
+.department-container a {
     display: flex;
     width: 100%;
     text-decoration: none;
-    color: black;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border-bottom: 0.01px solid darkgray;
-    border-top: 0.01px solid darkgray;
-
-
+    color: var(--text-sidebar);
+    padding: 12px 12px;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 0.88rem;
+    box-sizing: border-box;
+    transition: background 0.12s, color 0.12s;
 }
 
-.department-container a:hover{
+.department-container a:hover {
     cursor: pointer;
-    background-color: rgb(177, 177, 177);
+    background-color: var(--hover-sidebar);
+    color: var(--text-primary);
 }
 
-
-.create-dept{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 10px;
-    width: 100%;
-
-}
-.create-dept button{
-    display: flex;
-    background-color: rgb(197, 197, 197);
-    color: black;
-    border: transparent;
-    padding-top: 15px;
-    padding-bottom: 15px;
+.theme-toggle {
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    border: 0.5px solid var(--btn-border);
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    width: calc(100% - 16px);
+    margin: 8px;
+    text-align: left;
     position: absolute;
-    bottom:  0;
-    width: 100%;
+    bottom: 8px;
+    transition: background 0.12s;
 }
 
-.create-dept button:hover{
-    cursor: pointer;
-    background-color: rgb(177, 177, 177);
+.theme-toggle:hover {
+    background: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
 }
 
-.editDep-pencil button{
+.editDep-pencil button {
     justify-self: right;
 }

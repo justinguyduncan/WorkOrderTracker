@@ -9,6 +9,7 @@ import LeftNavBar from "./components/LeftNavBar";
 import Dashboard from "./components/dashboard/dashboard";
 import DepartmentPage from "./components/departmentmanagement/departmentlist";
 import SplashPage from "./components/splashpage"
+import { ThemeProvider } from "./context/Theme";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function App() {
   }, [dispatch]);
 
   return (
+    <ThemeProvider>
     <div className="app-container">
        {/* <Navigation isLoaded={isLoaded} /> */}
       {isLoaded && (
@@ -44,6 +46,7 @@ function App() {
         </div>
       )}
     </div>
+    </ThemeProvider>
   );
 }
 
