@@ -31,12 +31,17 @@ function getStatusClass(status) {
   }
 }
 
+function parseLocalDate(str) {
+  const [y, m, d] = str.split('-');
+  return new Date(y, m - 1, d);
+}
+
 function getDueDateClass(dueDate, status) {
   if (status === 'High Priority') return 'job-high-priority';
   if (!dueDate || status === 'Completed') return '';
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const due = new Date(dueDate);
+  const due = parseLocalDate(dueDate);
   const daysUntilDue = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
   if (daysUntilDue <= 0) return 'due-overdue';
   if (daysUntilDue === 1) return 'due-tomorrow';
@@ -148,7 +153,7 @@ function JobList({ selectedDepartmentId }) {
                 <span className={`status-badge ${getStatusClass(job.status)}`}>{job.status}</span>
                 {job.due_date && (
                   <span className="due-date-chip">
-                    {new Date(job.due_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    {parseLocalDate(job.due_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                   </span>
                 )}
                 <FontAwesomeIcon icon={faCaretDown} className={`caret ${expandedJobId === job.id ? 'caret-open' : ''}`} />
