@@ -20,8 +20,12 @@ function getStatusClass(status) {
       return 'status-design';
     case 'Install':
       return 'status-install';
-    case 'Ready For Delivery':
-      return 'status-ready';
+    case 'Estimate':
+      return 'status-estimate';
+    case 'Out for Proof':
+      return 'status-proof';
+    case 'Product Ordered':
+      return 'status-ordered';
     case 'Completed':
       return 'status-completed';
     case 'High Priority':
@@ -36,15 +40,19 @@ function parseLocalDate(str) {
   return new Date(y, m - 1, d);
 }
 
-function getDueDateClass(dueDate, status) {
+function getRowClass(dueDate, status) {
+  // High priority and due-date urgency get a full row color
   if (status === 'High Priority') return 'job-high-priority';
-  if (!dueDate || status === 'Completed') return '';
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const due = parseLocalDate(dueDate);
-  const daysUntilDue = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
-  if (daysUntilDue <= 0) return 'due-overdue';
-  if (daysUntilDue === 1) return 'due-tomorrow';
+  if (dueDate && status !== 'Completed') {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const due = parseLocalDate(dueDate);
+    const daysUntilDue = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
+    if (daysUntilDue <= 0) return 'due-overdue';
+    if (daysUntilDue === 1) return 'due-tomorrow';
+  }
+  // Estimates get a green row
+  if (status === 'Estimate') return 'row-estimate';
   return '';
 }
 
@@ -107,7 +115,7 @@ function JobList({ selectedDepartmentId }) {
   const activeJobs = sortedJobs.filter((j) => j.status !== 'Completed');
   const completedJobs = sortedJobs.filter((j) => j.status === 'Completed');
   const filterBySearch = (list) => query
-    ? list.filter((j) => j.title.toLowerCase().includes(query) || String(j.po_number).includes(query))
+    ? list.filter((j) => j.title.toLowerCase().includes(query) || String(j.po_number).toLowerCase().includes(query))
     : list;
   const visibleJobs = filterBySearch(activeTab === 'active' ? activeJobs : completedJobs);
 
@@ -118,7 +126,7 @@ function JobList({ selectedDepartmentId }) {
         <input
           className="job-search"
           type="text"
-          placeholder="Search by title or PO number…"
+          placeholder="Search by client or job number…"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
@@ -140,7 +148,7 @@ function JobList({ selectedDepartmentId }) {
       {visibleJobs.length > 0 ? (
         visibleJobs.map((job) => (
           <div
-            className={`job-container ${getDueDateClass(job.due_date, job.status)}`}
+            className={`job-container ${getRowClass(job.due_date, job.status)}`}
             key={job.id}
           >
             <div className="job-row" onClick={() => toggleJobDetails(job.id)}>

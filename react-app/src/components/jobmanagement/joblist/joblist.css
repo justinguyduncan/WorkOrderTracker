@@ -206,7 +206,9 @@
 .status-in-progress   { background-color: #b06030; }
 .status-design        { background-color: #5a6278; }
 .status-install       { background-color: #2e5f7a; }
-.status-ready         { background-color: #1e7068; }
+.status-estimate      { background-color: #43a047; }
+.status-proof         { background-color: #2e5f7a; }
+.status-ordered       { background-color: #1e7068; }
 .status-completed     { background-color: #147a5c; }
 
 @media (max-width: 768px) {
@@ -267,12 +269,16 @@
   }
 }
 
-/* Dark theme row colors */
+/* Dark theme row colors — urgency */
 body[data-theme="dark"] .job-high-priority { background-color: #2a0a0a; border-left: 3px solid #c0392b; }
 body[data-theme="dark"] .due-overdue       { background-color: #2a1018; border-left: 3px solid #a83240; }
 body[data-theme="dark"] .due-tomorrow      { background-color: #201c04; border-left: 3px solid #c9a800; }
 
-/* Light theme row colors */
+body[data-theme="dark"] .row-estimate    { background-color: #0d1f0f; border-left: 3px solid #43a047; }
+
+/* Light theme row colors — urgency */
 body[data-theme="light"] .job-high-priority { background-color: #fde8ea; border-left: 3px solid #c0392b; }
 body[data-theme="light"] .due-overdue       { background-color: #fde8ea; border-left: 3px solid #e63946; }
 body[data-theme="light"] .due-tomorrow      { background-color: #fdf8e1; border-left: 3px solid #e9c46a; }
+
+body[data-theme="light"] .row-estimate    { background-color: #e8f6e9; border-left: 3px solid #43a047; }

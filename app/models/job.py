@@ -10,7 +10,7 @@ class Job(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
-    po_number = db.Column(db.Integer, nullable=False)
+    po_number = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
     status = db.Column(db.String(255), nullable=False)
     install = db.Column(db.Boolean, nullable=False, default=False)

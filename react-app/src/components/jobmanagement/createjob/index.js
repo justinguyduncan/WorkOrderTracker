@@ -66,7 +66,7 @@ function CreateJob({ jobToEdit }) {
       <h2>{jobToEdit ? 'Edit Job' : 'Create a New Job'}</h2>
       <form onSubmit={handleSubmit}>
         <label className="field-full" htmlFor="title">
-          Job Title
+          Client Name
           <input
             type="text"
             id="title"
@@ -77,9 +77,9 @@ function CreateJob({ jobToEdit }) {
         </label>
 
         <label htmlFor="poNumber">
-          PO Number
+          Job Number
           <input
-            type="number"
+            type="text"
             id="poNumber"
             value={poNumber}
             onChange={(e) => setPoNumber(e.target.value)}
@@ -125,10 +125,12 @@ function CreateJob({ jobToEdit }) {
             >
               <option value="">Select Status</option>
               <option value="High Priority">High Priority</option>
-              <option value="In Progress">In Progress</option>
+              <option value="Estimate">Estimate</option>
               <option value="Design">Design</option>
+              <option value="Out for Proof">Out for Proof</option>
+              <option value="Product Ordered">Product Ordered</option>
+              <option value="In Progress">In Progress</option>
               <option value="Hold">Hold</option>
-              <option value="Ready For Delivery">Ready For Delivery</option>
               <option value="Completed">Completed</option>
             </select>
             <button

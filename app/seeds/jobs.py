@@ -4,29 +4,29 @@ from sqlalchemy import text  # Import the 'text' function
 
 def seed_jobs():
     job_1 = Job(
-        title='Job Title 1',
-        po_number=123456,
+        title='Client Name 1',
+        po_number='123456',
         description='Description of job 1',
         status='Hold',
         department_id=3
     )
     job_2 = Job(
-        title='Job Title 2',
-        po_number=789012,
+        title='Client Name 2',
+        po_number='789012',
         description='Description of job 2',
         status='In Progress',
         department_id=2
     )
     job_3 = Job(
-        title='Job Title 3',
-        po_number=111111,
+        title='Client Name 3',
+        po_number='111111',
         description='Description of job 3',
         status='Design',
         department_id=1
     )
     job_4 = Job(
-        title='Job Title 4',
-        po_number=222222,
+        title='Client Name 4',
+        po_number='222222',
         description='Description of job 4',
         status='Done',
         department_id=1
